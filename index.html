@@ -1,95 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poke, Poke, Ahh</title>
     <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">    
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="front">
-        <div class="navbar">
-            <div class="icon">
-                <img src="./images/icon.png" alt="Poke, Poke, Ahh!">
-            </div>
-            <div class="buttons">
-                <div class="etherscan">
-                    <img src="./images/etherscan.png" alt="etherscan">
-                </div>
-                <div class="opensea">
-                    <img src="./images/opensea.png" alt="opensea">
-                </div>
-                <div class="twitter">
-                    <img src="./images/twitter.png" alt="twitter">
-                </div>                
-                <div class="wallet">
-                    <img src="./images/wallet.png" alt="wallet">
-                </div>
-            </div>
-        </div>    
+    <div class="flex">
 
-        <img class="slogan" src="./images/slogan.png" alt="slogan">
-    </div>
-
-    <div class="mint">
-        <div class="content">
-            <div class="wallet-and-mint">
-                <p class="text" style="margin-top: 16px;">Your Wallet:</p>
-                <div class="button-li">
-                    <li>
-                        <div class="button">
-                            <p class="button-text">Connect Wallet</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="button">
-                            <p class="button-text sold-out">All Sold Out</p>
-                        </div>
-                    </li>
+        <div class="front">
+            <div class="navbar">
+                <div class="icon">
+                    <img src="./images/icon.png" alt="Poke, Poke, Ahh!">
+                </div>
+                <div class="buttons">
+                    <div class="etherscan">
+                        <img src="./images/etherscan.png" alt="etherscan">
+                    </div>
+                    <div class="opensea">
+                        <img src="./images/opensea.png" alt="opensea">
+                    </div>
+                    <div class="twitter">
+                        <img src="./images/twitter.png" alt="twitter">
+                    </div>
+                    <div class="wallet">
+                        <img src="./images/wallet.png" alt="wallet">
+                    </div>
                 </div>
             </div>
 
-            <p class="text">Please check on 
-                <a href="https://opensea.io/">Opensea</a>
-            </p>
-            <p class="text">Casting progress: please connect the wallet /1000 first. The price is 0.01 eth. Each wallet has 2 at most.</p>
-            <p class="text">Each person has 2 wallets every day</p>
-            <p class="text" style="font-weight:bold">Today, we are all conscience makers!</p>
+            <img class="slogan" src="./images/slogan.png" alt="slogan">
         </div>
-        <img class="line" src="images/line.png" alt="line">
-    </div>    
 
-    <div class="gallery">
-        <div class="content">
-            <img src="images/gallery-icon.png" alt="gallery-icon" class="gallery-icon">
-            <img style="height:430px" src="images/gallery.png" alt="gallery" class="gallery">
-        </div>        
+        <div class="mint">
+            <div class="content">
+                <div class="wallet-and-mint">
+                    <p class="text" style="margin-top: 16px;">Your Wallet:</p>
+                    <div class="button-li">
+                        <li>
+                            <div class="button" id="connect">
+                                <p class="button-text">Connect Wallet</p>
+                            </div>
+                        </li>
+                        <li>
+                            <p id="userWallet" class="text-2xl text-gray-800 my-2"></p>
+                        </li>
+                        <li>
+                            <div class="button" id="network">
+                                <p class="button-text">Switch Network</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="button" id="mint">
+                                <p class="button-text sold-out">Mint</p>
+                            </div>
+                        </li>
+                    </div>
+                </div>
 
-        <div class="picutes">
-            <img src="" alt="">
-        </div>        
-    </div>    
-
-
-    <div class="footer">
-        <div class="content">
-            <img class="footer-icon" src="./images/icon.png" alt="Poke, Poke, Ahh!">
-            <p class="footer-intro">
-                Nucleic acid NFT is the first metaverse focused on ancestor veneration.Eternalverse immortalizes life course and extends life in the metaverse.
-            </p>
-            <div class="footer-links">
-                <img class="link-icon" src="/images/twitter-white.png" alt="twitter">
-                <img class="link-icon" src="/images/opensea-white.png" alt="opensea">
+                <p class="text">Please check on
+                    <a href="https://opensea.io/">Opensea</a>
+                </p>
+                <p class="text">Casting progress: please connect the wallet /1000 first. The price is 0.01 eth. Each
+                    wallet has 2 at most.</p>
+                <p class="text">Each person has 2 wallets every day</p>
+                <p class="text" style="font-weight:bold">Today, we are all conscience makers!</p>
             </div>
-            <p class="right-reserved">
-                © 2022 CapCap.app. All rights reserved.
-            </p>
+            <img class="line" src="images/line.png" alt="line">
+        </div>
+
+        <div class="gallery">
+            <div class="content">
+                <img src="images/gallery-icon.png" alt="gallery-icon" class="gallery-icon">
+                <img style="height:430px" src="images/gallery.png" alt="gallery" class="gallery">
+            </div>
+
+            <div class="picutes">
+                <img src="" alt="">
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <div class="content">
+                <img class="footer-icon" src="./images/icon.png" alt="Poke, Poke, Ahh!">
+                <p class="footer-intro">
+                    Nucleic acid NFT is the first metaverse focused on ancestor veneration.Eternalverse immortalizes
+                    life course and extends life in the metaverse.
+                </p>
+                <div class="footer-links">
+                    <img class="link-icon" src="/images/twitter-white.png" alt="twitter">
+                    <img class="link-icon" src="/images/opensea-white.png" alt="opensea">
+                </div>
+                <p class="right-reserved">
+                    © 2022 CapCap.app. All rights reserved.
+                </p>
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+    <script src="./abi.js"></script>
     <script src="./wallet.js"></script>
 </body>
+
 </html>
