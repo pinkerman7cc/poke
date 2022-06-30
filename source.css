@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind utilities;
+
+#connect-wallet-top {
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none
+}
+
+#minus {
+    cursor: pointer;
+}
+
+#plus {
+    cursor: pointer;
+}
+
+#mint {
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .icon {
+        margin: auto;
+    }
+
+    #navbar {
+        flex-direction: column;
+    }
+
+    #navbar>div {
+        margin: 10px;
+    }
+
+    .footer-links {
+        margin-left: 40%;
+    }
+
+    .slogan {
+        display: none;
+    }
+
+    * {
+        text-align: center;
+    }
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 28px;
+}
+
+.front {
+    background-image: url('images/front-bg.png');
+    background-position: center;
+}
+
+.max-w {
+    max-width: 1920px;
+}
+
+.mint {
+    background-color: #7FAAFF;
+    border: 2px solid black;
+    max-width: 1920px;
+}
+
+.gallery {
+    background-color: #A400FF;
+    max-width: 1920px;
+}
+
+.footer {
+    background-color: #333333;
+    max-width: 1920px;
+}
+
+.button {
+    width: 230px;
+    height: 60px;
+    cursor: pointer;
+    background-image: url('images/wallet-1.png');
+}
+
+.mint-button {
+    width: 230px;
+    height: 60px;
+    background-image: url('images/wallet-1.png');
+}
+
+.button-text {
+    font-size: 24px;
+    color: #333333;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 600;
+    padding-top: 18px;
+}
+
+.text {
+    font-size: 24px;
+    color: #000000;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 32px;
+    font-weight: 500;
+    margin-top: 21px;
+    margin-bottom: 21px;
+}
+
+.content {
+    max-width: 1200px;
+}
+
+.footer-intro {
+    font-size: 12px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 12px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links>div {
+    display: flex;
+}
+
+.link-icon {
+    border: 1px solid #A400FF;
+    width: 40px;
+    height: 40px;
+    padding: 10px 10px 10px 10px;
+    margin-right: 10px;
+}
+
+.right-reserved {
+    font-size: 12px;
+    margin-top: 34px;
+    color: #FFDF38;
+    letter-spacing: 0;
+    line-height: 12px;
+    font-weight: 400;
+}
