@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poke, Poke, Ahh</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="stylesheet" href="style.css">
+    <link href="./style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -19,14 +17,18 @@
                     <img class="icon" src="./images/icon.png" alt="Poke, Poke, Ahh!">
                 </div>
                 <div class="buttons flex justify-around">
-                    <div class="etherscan mx-2">
-                        <img src="./images/etherscan.png" alt="etherscan">
+                    <div class="mx-2">
+                        <a href="" id="explorer"><img src="./images/etherscan.png" alt="etherscan"></a>
                     </div>
-                    <div class="opensea mx-2">
-                        <img src="./images/opensea.png" alt="opensea">
+                    <div class="mx-2">
+                        <a href="" id="opensea">
+                            <img src="./images/opensea.png" alt="opensea">
+                        </a>
                     </div>
-                    <div class="twitter mx-2">
-                        <img src="./images/twitter.png" alt="twitter">
+                    <div class="mx-2">
+                        <a href="" id="twitter">
+                            <img src="./images/twitter.png" alt="twitter">
+                        </a>
                     </div>
                     <div class="wallet mx-2">
                         <img src="./images/wallet.png" alt="wallet" id="connect-wallet-top">
@@ -51,7 +53,7 @@
                     <p class="text-center" id="connected-wallet"></p>
                 </div>
 
-                <div class="flex mx-auto w-1/2">
+                <div class="flex mx-auto">
                     <div class="flex mx-auto">
                         <div class="mint-button flex justify-evenly">
                             <p class="button-text" id="minus">-</p>
@@ -101,8 +103,9 @@
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="abi.js"></script>
+    <script src="./web3.js"></script>
+    <script src="./config.js"></script>
+    <script src="./abi.js"></script>
     <script src="./script.js"></script>
 </body>
 

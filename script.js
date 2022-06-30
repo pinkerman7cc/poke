@@ -1,17 +1,3 @@
-// config
-const NETWORK_ID = 4;
-// const CONTRACT_ADDR = '0x3f179Bb801dd1DF3263724C0AA7a959ACa8A5c08';
-// const TOTAL_SUPPLY = 5000;
-// const FREE_SUPPLY = 2000;
-// const MAX_MINT = 2;
-// const PRICE = 0.00777;
-const CONTRACT_ADDR = '0xc3f2CC8C9f7F859e1b0F6368d674c8E53F78d0b5';
-const TOTAL_SUPPLY = 10;
-const FREE_SUPPLY = 5;
-const MAX_MINT = 2;
-const PRICE = 0.00777;
-
-
 // lib
 const web3 = new Web3(window.ethereum);
 const contract = new web3.eth.Contract(abi, CONTRACT_ADDR)
@@ -57,9 +43,10 @@ const accountChange = () => {
         if (accounts.length > 0) {
             window.userWalletAddress = accounts[0]
             connectedWallet.innerText = `Connected to: ${window.userWalletAddress}`
-            exceedMaxMint(window.userWalletAddress)
         } else {
             connectedWallet.innerText = ``
+            walletBtn.classList.remove('disabled')
+            walletTopBtn.classList.remove('disabled')
             walletText.innerText = 'Connect Wallet'
         }
     });
@@ -107,23 +94,23 @@ const switchNetwork = async () => {
     });
 }
 
-const minted = async () => {
+const getMinted = async () => {
     return await contract.methods.minted().call();
 }
 
 const updateMinted = async () => {
-    const mintedNFT = Number(await minted());
-    mintedText.innerText = `${mintedNFT} `;
-    if (mintedNFT == TOTAL_SUPPLY) {
+    const minted = Number(await getMinted());
+    mintedText.innerText = `${minted} `;
+    if (minted == TOTAL_SUPPLY) {
 
     }
 }
 
-const freeMinted = async () => {
+const getFreeMinted = async () => {
     return await contract.methods.freeMinted().call();
 }
 
-const addressClaimed = async (addr) => {
+const getClaimed = async (addr) => {
     let claimed = 0;
 
     try {
@@ -136,7 +123,7 @@ const addressClaimed = async (addr) => {
 };
 
 const exceedMaxMint = async (addr) => {
-    const claimed = await addressClaimed(addr);
+    const claimed = await getClaimed(addr);
     if (claimed == MAX_MINT) {
         return true
     } else {
@@ -145,7 +132,7 @@ const exceedMaxMint = async (addr) => {
 }
 
 const freeMintFinished = async () => {
-    const num = await freeMinted();
+    const num = await getFreeMinted();
     if (num == FREE_SUPPLY) {
         return true
     }
@@ -153,7 +140,7 @@ const freeMintFinished = async () => {
 }
 
 const mintFinished = async () => {
-    const num = await minted();
+    const num = await getMinted();
     if (num == TOTAL_SUPPLY) {
         return true
     }
@@ -164,21 +151,20 @@ const mint = async () => {
     await switchNetwork();
 
     const amount = Number(mintAmount.innerText);
-    const claimed = Number(await addressClaimed(window.userWalletAddress));
+    const claimed = Number(await getClaimed(window.userWalletAddress));
 
     if (claimed + amount > MAX_MINT) {
         alert("Exceed max mint")
         return
     }
 
-    const mintedNFT = Number(await minted());
-    if (mintedNFT + amount > TOTAL_SUPPLY) {
+    const minted = Number(await getMinted());
+    if (minted + amount > TOTAL_SUPPLY) {
         alert("Exceed total supply")
         return
     }
 
-    const freeOver = await freeMintFinished();
-    const freeQuota = FREE_SUPPLY - Number(await freeMinted());
+    const freeQuota = FREE_SUPPLY - Number(await getFreeMinted());
     let freeAmount = 0;
     if (window.userWalletAddress !== null) {
         if (freeQuota > MAX_MINT) {
@@ -204,7 +190,7 @@ const mint = async () => {
     }
 }
 
-const mintAmountBtn = () => {
+const mintAmountHook = () => {
     plus.addEventListener('click', () => {
         mintAmount.innerText = 2
     })
@@ -213,13 +199,17 @@ const mintAmountBtn = () => {
     })
 }
 
+const mintHook = () => {
+    mintBtn.addEventListener('click', mint)
+}
+
 window.addEventListener('DOMContentLoaded', async (event) => {
-    updateMinted();
+    await updateMinted();
     if (connectable()) {
-        await switchNetwork()
-        await loginWithMataMask()
-        accountChange()
-        mintAmountBtn()
-        mintBtn.addEventListener('click', mint)
+        await switchNetwork();
+        await loginWithMataMask();
+        mintAmountHook();
+        mintHook;
+        accountChange();
     }
 })
