@@ -1,4 +1,12 @@
-const config = {
-    CONTRACT_ADDR: "",
-
-}
+// config
+const NETWORK_ID = 4;
+// const CONTRACT_ADDR = '0x3f179Bb801dd1DF3263724C0AA7a959ACa8A5c08';
+// const TOTAL_SUPPLY = 5000;
+// const FREE_SUPPLY = 2000;
+// const MAX_MINT = 2;
+// const PRICE = 0.00777;
+const CONTRACT_ADDR = '0xc3f2CC8C9f7F859e1b0F6368d674c8E53F78d0b5';
+const TOTAL_SUPPLY = 10;
+const FREE_SUPPLY = 5;
+const MAX_MINT = 2;
+const PRICE = 0.00777;
