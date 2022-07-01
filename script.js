@@ -10,7 +10,6 @@ const walletText = document.getElementById('wallet-text');
 const connectedWallet = document.getElementById('connected-wallet');
 
 const mintBtn = document.getElementById('mint');
-const mintText = document.getElementById('mint-text');
 const minus = document.getElementById('minus');
 const plus = document.getElementById('plus');
 const mintAmount = document.getElementById('mint-amount');
@@ -46,7 +45,7 @@ const accountChange = () => {
         } else {
             connectedWallet.innerText = ``
             walletBtn.classList.remove('disabled')
-            walletTopBtn.classList.remove('disabled')
+            walletTopBtn.classList.remove('disable')
             walletTopBtn.classList.remove('hide')
             walletText.innerText = 'Connect Wallet'
         }
@@ -56,9 +55,9 @@ const accountChange = () => {
 const connectable = () => {
     if (!window.ethereum) {
         alert('MetaMask is not installed')
-        walletText.innerText = 'Install Metamask'
-        walletBtn.classList.add('disabled')
-        mintBtn.classList.add('disabled')
+        const mintFeatures = document.getElementById('mint-features');
+        mintFeatures.classList.add("hide");
+        walletTopBtn.classList.add("hide");
         return false
     }
 
@@ -103,7 +102,12 @@ const updateMinted = async () => {
     const minted = Number(await getMinted());
     mintedText.innerText = `${minted} `;
     if (minted == TOTAL_SUPPLY) {
-
+        const mintFeatures = document.getElementById('mint-features');
+        mintFeatures.classList.add("hide");
+        walletTopBtn.classList.add("hide");
+        const progress = document.getElementById('progress');
+        progress.childNodes[0].textContent = 'Sold out: ';
+        return true
     }
 }
 
@@ -149,26 +153,33 @@ const mintFinished = async () => {
 }
 
 const mint = async () => {
+    const amount = Number(mintAmount.innerText);
+    mintBtn.childNodes[0].textContent = "Minting... "
+    mintBtn.childNodes[1].textContent = ""
     await switchNetwork();
 
-    const amount = Number(mintAmount.innerText);
+
     const claimed = Number(await getClaimed(window.userWalletAddress));
 
     if (claimed + amount > MAX_MINT) {
         alert("Exceed max mint")
+        mintBtn.childNodes[0].textContent = "Mint "
+        mintBtn.childNodes[1].textContent = "1"
         return
     }
 
     const minted = Number(await getMinted());
     if (minted + amount > TOTAL_SUPPLY) {
         alert("Exceed total supply")
+        mintBtn.childNodes[0].textContent = "Mint "
+        mintBtn.childNodes[1].textContent = "1"
         return
     }
 
     const freeQuota = FREE_SUPPLY - Number(await getFreeMinted());
     let freeAmount = 0;
     if (window.userWalletAddress !== null) {
-        if (freeQuota > MAX_MINT) {
+        if (freeQuota >= MAX_MINT) {
             freeAmount = amount;
         } else if (freeQuota > 0) {
             freeAmount = freeQuota;
@@ -178,6 +189,7 @@ const mint = async () => {
 
 
         const requiredValue = (amount - freeAmount) * PRICE;
+        console.log(requiredValue)
         try {
             await contract.methods.mint(amount).send({
                 from: window.userWalletAddress,
@@ -189,6 +201,8 @@ const mint = async () => {
 
         updateMinted();
     }
+    mintBtn.childNodes[0].textContent = "Mint "
+    mintBtn.childNodes[1].textContent = "1"
 }
 
 const mintAmountHook = () => {
@@ -205,12 +219,15 @@ const mintHook = () => {
 }
 
 window.addEventListener('DOMContentLoaded', async (event) => {
-    updateMinted();
+    setInterval(() => { updateMinted() }, 1000);
     if (connectable()) {
         await switchNetwork();
-        await loginWithMataMask();
-        mintAmountHook();
-        mintHook();
-        accountChange();
+        const soldOut = await updateMinted();
+        if (!soldOut) {
+            await loginWithMataMask();
+            mintAmountHook();
+            mintHook();
+            accountChange();
+        }
     }
 })
