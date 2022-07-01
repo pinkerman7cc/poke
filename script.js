@@ -34,7 +34,7 @@ const loginWithMataMask = async () => {
     window.userWalletAddress = accounts[0]
     connectedWallet.innerText = `Connected to: ${window.userWalletAddress}`
     walletBtn.classList.add('disabled')
-    walletTopBtn.classList.add('disabled')
+    walletTopBtn.classList.add('hide')
     walletText.innerText = 'Connected'
 }
 
@@ -47,6 +47,7 @@ const accountChange = () => {
             connectedWallet.innerText = ``
             walletBtn.classList.remove('disabled')
             walletTopBtn.classList.remove('disabled')
+            walletTopBtn.classList.remove('hide')
             walletText.innerText = 'Connect Wallet'
         }
     });
@@ -204,12 +205,12 @@ const mintHook = () => {
 }
 
 window.addEventListener('DOMContentLoaded', async (event) => {
-    await updateMinted();
+    updateMinted();
     if (connectable()) {
         await switchNetwork();
         await loginWithMataMask();
         mintAmountHook();
-        mintHook;
+        mintHook();
         accountChange();
     }
 })

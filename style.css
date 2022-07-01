@@ -596,8 +596,8 @@ video {
   width: 100%;
 }
 
-.w-1\/2 {
-  width: 50%;
+.w-3\/5 {
+  width: 60%;
 }
 
 .w-min {
@@ -664,6 +664,14 @@ video {
   cursor: pointer;
 }
 
+.hide {
+  display: none;
+}
+
+.showcase {
+  display: none;
+}
+
 .disabled {
   pointer-events: none
 }
@@ -678,6 +686,9 @@ video {
 
 #mint {
   cursor: pointer;
+}
+
+#opensea:hover {
 }
 
 @media (max-width: 1000px) {
@@ -703,6 +714,24 @@ video {
 
   * {
     text-align: center;
+  }
+
+  #wide-showcase {
+    display: none;
+  }
+
+  .showcase {
+    display: block;
+    background-color: white;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .gallery-icon {
+    margin: auto;
   }
 }
 
@@ -741,6 +770,14 @@ li {
   height: 60px;
   cursor: pointer;
   background-image: url('images/wallet-1.png');
+}
+
+.button:hover {
+  width: 230px;
+  height: 60px;
+  cursor: pointer;
+  color: white;
+  background-image: url('images/wallet-1-hover.png');
 }
 
 .mint-button {
@@ -806,6 +843,11 @@ li {
   letter-spacing: 0;
   line-height: 12px;
   font-weight: 400;
+}
+
+.hover\:bg-sky-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 105 161 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 1024px) {

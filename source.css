@@ -5,6 +5,14 @@
     cursor: pointer;
 }
 
+.hide {
+    display: none;
+}
+
+.showcase {
+    display: none;
+}
+
 .disabled {
     pointer-events: none
 }
@@ -20,6 +28,8 @@
 #mint {
     cursor: pointer;
 }
+
+#opensea:hover {}
 
 @media (max-width: 1000px) {
     .icon {
@@ -44,6 +54,24 @@
 
     * {
         text-align: center;
+    }
+
+    #wide-showcase {
+        display: none;
+    }
+
+    .showcase {
+        display: block;
+        background-color: white;
+        border: 2px solid black;
+        padding: 5px;
+        border-radius: 10px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .gallery-icon {
+        margin: auto;
     }
 }
 
@@ -82,6 +110,14 @@ li {
     height: 60px;
     cursor: pointer;
     background-image: url('images/wallet-1.png');
+}
+
+.button:hover {
+    width: 230px;
+    height: 60px;
+    cursor: pointer;
+    color: white;
+    background-image: url('images/wallet-1-hover.png');
 }
 
 .mint-button {

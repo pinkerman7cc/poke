@@ -18,16 +18,18 @@
                 </div>
                 <div class="buttons flex justify-around">
                     <div class="mx-2">
-                        <a href="" id="explorer"><img src="./images/etherscan.png" alt="etherscan"></a>
-                    </div>
-                    <div class="mx-2">
-                        <a href="" id="opensea">
-                            <img src="./images/opensea.png" alt="opensea">
+                        <a href="">
+                            <img src="./images/etherscan.png" alt="etherscan" id="explorer">
                         </a>
                     </div>
                     <div class="mx-2">
-                        <a href="" id="twitter">
-                            <img src="./images/twitter.png" alt="twitter">
+                        <a href="">
+                            <img src="./images/opensea.png" alt="opensea" id="opensea">
+                        </a>
+                    </div>
+                    <div class="mx-2">
+                        <a href="">
+                            <img src="./images/twitter.png" alt="twitter" id="twitter">
                         </a>
                     </div>
                     <div class="wallet mx-2">
@@ -45,8 +47,8 @@
 
         <div class="w-full mint m-auto">
             <div class="flex-col pt-10">
-                <div class="button mx-auto mb-3" id="connect">
-                    <p class="button-text" id="wallet-text">Connect Wallet</p>
+                <div class="button mx-auto mb-3 button-text" id="connect">
+                    <p id="wallet-text">Connect Wallet</p>
                 </div>
 
                 <div class="mx-auto mb-3">
@@ -77,7 +79,15 @@
         <div class="w-full gallery m-auto py-12">
             <div class="content m-auto">
                 <img src="images/gallery-icon.png" alt="gallery-icon" class="gallery-icon">
-                <img class="m-auto" src="./images/gallery.png" alt="gallery" class="gallery">
+                <img class="m-auto" src="./images/gallery.png" alt="gallery" id="wide-showcase">
+
+                <img class="m-auto w-3/5 showcase" src="./images/6.png" alt="gallery">
+                <img class="m-auto w-3/5 showcase" src="./images/1.png" alt="gallery">
+                <img class="m-auto w-3/5 showcase" src="./images/2.png" alt="gallery">
+                <img class="m-auto w-3/5 showcase" src="./images/3.png" alt="gallery">
+                <img class="m-auto w-3/5 showcase" src="./images/4.png" alt="gallery">
+                <img class="m-auto w-3/5 showcase" src="./images/5.png" alt="gallery">
+
             </div>
 
         </div>
@@ -103,6 +113,7 @@
 
     </div>
 
+    <script src="./hover.js"></script>
     <script src="./web3.js"></script>
     <script src="./config.js"></script>
     <script src="./abi.js"></script>
