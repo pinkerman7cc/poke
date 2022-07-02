@@ -747,7 +747,7 @@ li {
 }
 
 .front {
-  background-image: url('images/front-bg.png');
+  background-image: url('./images/front-bg.png');
   background-position: center;
 }
 
@@ -775,7 +775,7 @@ li {
   width: 230px;
   height: 60px;
   cursor: pointer;
-  background-image: url('images/wallet-1.png');
+  background-image: url('./images/wallet-1.png');
 }
 
 .button:hover {
@@ -783,13 +783,13 @@ li {
   height: 60px;
   cursor: pointer;
   color: white;
-  background-image: url('images/wallet-1-hover.png');
+  background-image: url('./images/wallet-1-hover.png');
 }
 
 .mint-button {
   width: 230px;
   height: 60px;
-  background-image: url('images/wallet-1.png');
+  background-image: url('./images/wallet-1.png');
 }
 
 .mint-button:hover {
@@ -797,7 +797,7 @@ li {
   height: 60px;
   cursor: pointer;
   color: white;
-  background-image: url('images/wallet-1-hover.png');
+  background-image: url('./images/wallet-1-hover.png');
 }
 
 .button-text {
@@ -856,6 +856,10 @@ li {
   letter-spacing: 0;
   line-height: 12px;
   font-weight: 400;
+}
+
+.show {
+  display: block;
 }
 
 @media (min-width: 1024px) {

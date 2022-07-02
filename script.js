@@ -8,6 +8,7 @@ const walletTopBtn = document.getElementById('connect-wallet-top');
 const walletBtn = document.getElementById('connect');
 const walletText = document.getElementById('wallet-text');
 const connectedWallet = document.getElementById('connected-wallet');
+const logoutBtn = document.getElementById('logout');
 
 const mintBtn = document.getElementById('mint');
 const minus = document.getElementById('minus');
@@ -32,20 +33,26 @@ const loginWithMataMask = async () => {
 
     window.userWalletAddress = accounts[0]
     connectedWallet.innerText = `Connected to: ${window.userWalletAddress}`
-    walletBtn.classList.add('disabled')
+    walletBtn.classList.add('hide')
+    logoutBtn.classList.remove('hide')
     walletTopBtn.classList.add('hide')
     walletText.innerText = 'Connected'
 }
 
-const accountChange = () => {
+const accountChangeHook = () => {
     ethereum.on('accountsChanged', (accounts) => {
         if (accounts.length > 0) {
             window.userWalletAddress = accounts[0]
             connectedWallet.innerText = `Connected to: ${window.userWalletAddress}`
+            walletBtn.classList.add("hide")
+            walletTopBtn.classList.add("hide")
+            logoutBtn.classList.remove("hide")
         } else {
+            logoutBtn.classList.add("hide")
             connectedWallet.innerText = ``
             walletBtn.classList.remove('disabled')
-            walletTopBtn.classList.remove('disable')
+            walletBtn.classList.remove('hide')
+            walletTopBtn.classList.remove('disabled')
             walletTopBtn.classList.remove('hide')
             walletText.innerText = 'Connect Wallet'
         }
@@ -61,8 +68,6 @@ const connectable = () => {
         return false
     }
 
-    walletBtn.addEventListener('click', loginWithMataMask)
-    walletTopBtn.addEventListener('click', loginWithMataMask)
     return true
 }
 
@@ -96,6 +101,10 @@ const switchNetwork = async () => {
 
 const getMinted = async () => {
     return await contract.methods.minted().call();
+}
+
+const getStarted = async () => {
+    return await contract.methods.started().call();
 }
 
 const updateMinted = async () => {
@@ -156,8 +165,8 @@ const mint = async () => {
     const amount = Number(mintAmount.innerText);
     mintBtn.childNodes[0].textContent = "Minting... "
     mintBtn.childNodes[1].textContent = ""
+    mintBtn.classList.add('disabled')
     await switchNetwork();
-
 
     const claimed = Number(await getClaimed(window.userWalletAddress));
 
@@ -165,6 +174,7 @@ const mint = async () => {
         alert("Exceed max mint")
         mintBtn.childNodes[0].textContent = "Mint "
         mintBtn.childNodes[1].textContent = "1"
+        mintBtn.classList.remove('disabled')
         return
     }
 
@@ -173,6 +183,7 @@ const mint = async () => {
         alert("Exceed total supply")
         mintBtn.childNodes[0].textContent = "Mint "
         mintBtn.childNodes[1].textContent = "1"
+        mintBtn.classList.remove('disabled')
         return
     }
 
@@ -203,6 +214,7 @@ const mint = async () => {
     }
     mintBtn.childNodes[0].textContent = "Mint "
     mintBtn.childNodes[1].textContent = "1"
+    mintBtn.classList.remove('disabled')
 }
 
 const mintAmountHook = () => {
@@ -218,16 +230,43 @@ const mintHook = () => {
     mintBtn.addEventListener('click', mint)
 }
 
+const logoutHook = () => {
+    logoutBtn.addEventListener('click', () => {
+        connectedWallet.innerText = ``
+        walletBtn.classList.remove('hide')
+        walletBtn.classList.remove('disabled')
+        logoutBtn.classList.add('hide')
+        walletTopBtn.classList.remove('hide')
+        walletTopBtn.classList.remove('disabled')
+        walletText.innerText = 'Connect'
+    })
+}
+
+const connectHook = () => {
+    walletBtn.addEventListener('click', loginWithMataMask)
+    walletTopBtn.addEventListener('click', loginWithMataMask)
+}
+
 window.addEventListener('DOMContentLoaded', async (event) => {
+    logoutBtn.classList.add('hide');
     setInterval(() => { updateMinted() }, 1000);
     if (connectable()) {
         await switchNetwork();
+        const started = await getStarted();
+
+        if (!started) {
+            alert("Mint not started yet")
+            return
+        }
+
         const soldOut = await updateMinted();
         if (!soldOut) {
             await loginWithMataMask();
+            connectHook();
+            logoutHook();
             mintAmountHook();
             mintHook();
-            accountChange();
+            accountChangeHook();
         }
     }
 })
