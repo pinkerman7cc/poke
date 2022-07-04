@@ -247,6 +247,16 @@ const connectHook = () => {
     walletTopBtn.addEventListener('click', loginWithMataMask)
 }
 
+const notStartedYet = () => {
+    alert(`Mint not started yet, please follow our Twitter for the latest information`)
+}
+
+const notStartedHook = () => {
+    walletBtn.addEventListener('click', notStartedYet)
+    walletTopBtn.addEventListener('click', notStartedYet)
+    mintBtn.addEventListener('click', notStartedYet)
+}
+
 window.addEventListener('DOMContentLoaded', async (event) => {
     logoutBtn.classList.add('hide');
     setInterval(() => { updateMinted() }, 1000);
@@ -255,7 +265,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         const started = await getStarted();
 
         if (!started) {
-            alert("Mint not started yet")
+            notStartedYet()
+            notStartedHook()
             return
         }
 
