@@ -14,12 +14,15 @@ contract PPA is ERC721A, Ownable, ReentrancyGuard {
     bool public started = false;
     uint256 public minted = 0;
     uint256 public freeMinted = 0;
+    bool public devCliamed = false;
 
     // Public Constants
     uint256 public constant MAX_SUPPLY = 5000;
     uint256 public constant FREE_SUPPLY = 2000;
-    uint256 public constant PRICE = 0.001 ether;
+    uint256 public constant PRICE = 0.00777 ether;
     uint256 public constant MAX_MINT = 2;
+    uint256 public constant DEV_MINT = 200;
+
 
     mapping(address => uint256) public addressClaimed;
 
@@ -38,6 +41,7 @@ contract PPA is ERC721A, Ownable, ReentrancyGuard {
         );
         require(totalSupply() < MAX_SUPPLY, "Minting Finished");
         require(totalSupply() + amount <= MAX_SUPPLY, "Exceed max supply");
+        require(msg.sender != owner(), "Dev is not allowd to use public mint");
 
         uint256 freeQuota = FREE_SUPPLY - freeMinted;
         uint256 freeAmount = 0;
@@ -87,6 +91,15 @@ contract PPA is ERC721A, Ownable, ReentrancyGuard {
             size := extcodesize(account)
         }
         return size > 0;
+    }
+
+    function devMint() external onlyOwner {
+        require(totalSupply() < MAX_SUPPLY, "Minting Finished");
+        require(devCliamed == false, "Dev mint over");
+        _safeMint(msg.sender, DEV_MINT);
+        freeMinted += DEV_MINT;
+        minted += DEV_MINT;
+        devCliamed = true;
     }
 
     modifier notContract() {
