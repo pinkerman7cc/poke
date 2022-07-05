@@ -3,3 +3,5 @@ main.go
 *.tar.gz
 /build
 /ppa-components
+*.xlsx
+*.sol
